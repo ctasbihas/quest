@@ -14,6 +14,7 @@ import com.facebook.soloader.SoLoader
 import com.facebook.react.shell.MainReactPackage
 import org.devio.rn.splashscreen.SplashScreenReactPackage
 import java.util.Arrays
+import com.oblador.vectoricons.VectorIconsPackage;
 
 class MainApplication : Application(), ReactApplication {
 
@@ -22,6 +23,7 @@ class MainApplication : Application(), ReactApplication {
         override fun getPackages(): List<ReactPackage> =
             PackageList(this).packages.apply {
               SplashScreenReactPackage()
+              VectorIconsPackage()
             }
 
         override fun getJSMainModuleName(): String = "index"
