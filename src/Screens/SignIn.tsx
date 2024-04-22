@@ -10,17 +10,12 @@ import {
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const SignUp = ({ navigation }) => {
+const SignIn = ({ navigation }) => {
 	const [formValues, setFormValues] = React.useState({
-		name: '',
 		email: '',
 		password: '',
-		confirmPassword: '',
 	});
-	const [show, setShow] = React.useState({
-		pass: false,
-		confirmPass: false,
-	});
+	const [show, setShow] = React.useState(false);
 
 	const hanldeSignUp = () => {
 		console.log(formValues);
@@ -28,36 +23,11 @@ const SignUp = ({ navigation }) => {
 	return (
 		<ScrollView>
 			<Text textAlign={'center'} paddingX={6} fontSize={'lg'}>
-				Get started chatting with friends and families by signing up on
-				our app.
+				Welcome back! Sign in to continue chatting with friends and
+				family.
 			</Text>
 
 			<Stack space={5} w="100%" alignItems="center" marginTop={10}>
-				<VStack>
-					<Text color={'#24786D'} fontSize={'xl'}>
-						Your Name
-					</Text>
-					<Input
-						placeholder="John Doe"
-						w={{
-							base: '90%',
-							md: '25%',
-						}}
-						fontSize={'2xl'}
-						borderWidth={0}
-						paddingLeft={'0'}
-						paddingY={'2'}
-						backgroundColor={'muted.100'}
-						borderBottomWidth={'4'}
-						borderRadius={'none'}
-						autoCapitalize="words"
-						maxLength={30}
-						value={formValues.name}
-						onChangeText={text =>
-							setFormValues({ ...formValues, name: text })
-						}
-					/>
-				</VStack>
 				<VStack>
 					<Text color={'#24786D'} fontSize={'xl'}>
 						Your Email
@@ -101,17 +71,14 @@ const SignUp = ({ navigation }) => {
 						borderBottomWidth={'4'}
 						borderRadius={'none'}
 						autoCapitalize="none"
-						type={show.pass ? 'text' : 'password'}
+						type={show ? 'text' : 'password'}
 						InputRightElement={
-							<Pressable
-								onPress={() =>
-									setShow({ ...show, pass: !show.pass })
-								}>
+							<Pressable onPress={() => setShow(!show)}>
 								<Icon
 									as={
 										<MaterialIcons
 											name={
-												show.pass
+												show
 													? 'visibility-off'
 													: 'visibility'
 											}
@@ -126,58 +93,6 @@ const SignUp = ({ navigation }) => {
 						value={formValues.password}
 						onChangeText={text =>
 							setFormValues({ ...formValues, password: text })
-						}
-					/>
-				</VStack>
-				<VStack>
-					<Text color={'#24786D'} fontSize={'xl'}>
-						Confirm Password
-					</Text>
-					<Input
-						placeholder="********"
-						w={{
-							base: '90%',
-							md: '25%',
-						}}
-						fontSize={'2xl'}
-						borderWidth={0}
-						paddingLeft={'0'}
-						paddingY={'2'}
-						backgroundColor={'muted.100'}
-						borderBottomWidth={'4'}
-						borderRadius={'none'}
-						autoCapitalize="none"
-						type={show.confirmPass ? 'text' : 'password'}
-						InputRightElement={
-							<Pressable
-								onPress={() =>
-									setShow({
-										...show,
-										confirmPass: !show.confirmPass,
-									})
-								}>
-								<Icon
-									as={
-										<MaterialIcons
-											name={
-												show.confirmPass
-													? 'visibility-off'
-													: 'visibility'
-											}
-										/>
-									}
-									size={10}
-									mr="2"
-									color="muted.400"
-								/>
-							</Pressable>
-						}
-						value={formValues.confirmPassword}
-						onChangeText={text =>
-							setFormValues({
-								...formValues,
-								confirmPassword: text,
-							})
 						}
 					/>
 				</VStack>
@@ -197,21 +112,21 @@ const SignUp = ({ navigation }) => {
 					color={'white'}
 					fontWeight={'bold'}
 					textAlign={'center'}>
-					Sign Up
+					Sign In
 				</Text>
 			</Pressable>
 
 			<Text textAlign={'center'} marginTop={20} fontSize={20}>
-				Already have an account?{' '}
+				Don't have an account?{' '}
 				<Text
 					underline
 					fontWeight={'black'}
-					onPress={() => navigation.replace('SignIn')}>
-					Sign In
+					onPress={() => navigation.replace('SignUp')}>
+					Sign Up
 				</Text>
 			</Text>
 		</ScrollView>
 	);
 };
 
-export default SignUp;
+export default SignIn;
