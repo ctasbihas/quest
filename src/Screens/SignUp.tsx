@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
 	Icon,
 	Input,
@@ -6,11 +7,12 @@ import {
 	Stack,
 	Text,
 	VStack,
+	useToast,
 } from 'native-base';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const SignUp = ({ navigation }) => {
+const SignUp = ({ navigation }: { navigation: any }) => {
 	const [formValues, setFormValues] = React.useState({
 		name: '',
 		email: '',
@@ -21,9 +23,40 @@ const SignUp = ({ navigation }) => {
 		pass: false,
 		confirmPass: false,
 	});
+	const [loading, setLoading] = React.useState(false);
+	const toast = useToast();
 
 	const hanldeSignUp = () => {
-		console.log(formValues);
+		setLoading(true);
+
+		fetch('http://192.168.0.101:5000/createUser', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				name: formValues.name,
+				email: formValues.email,
+				password: formValues.password,
+			}),
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.error) {
+					console.log(data);
+				} else {
+					toast.show({
+						description: 'Account created successfully',
+					});
+					AsyncStorage.setItem('user-email', data.email);
+					navigation.replace('SignIn');
+				}
+				setLoading(false);
+			})
+			.catch(error => {
+				console.error('Error:', error.message);
+				setLoading(false);
+			});
 	};
 	return (
 		<ScrollView>
@@ -191,13 +224,14 @@ const SignUp = ({ navigation }) => {
 				alignSelf={'center'}
 				backgroundColor={'emerald.600'}
 				_pressed={{ opacity: 80 }}
-				onPress={hanldeSignUp}>
+				onPress={hanldeSignUp}
+				disabled={loading}>
 				<Text
 					fontSize={20}
 					color={'white'}
 					fontWeight={'bold'}
 					textAlign={'center'}>
-					Sign Up
+					{loading ? 'Loading...' : 'Sign Up'}
 				</Text>
 			</Pressable>
 
