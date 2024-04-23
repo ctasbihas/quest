@@ -1,24 +1,67 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
+	Box,
 	Icon,
 	Input,
 	Pressable,
 	ScrollView,
+	Spinner,
 	Stack,
 	Text,
 	VStack,
+	useToast,
 } from 'native-base';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const SignIn = ({ navigation }) => {
+const SignIn = ({ navigation }: any) => {
 	const [formValues, setFormValues] = React.useState({
 		email: '',
 		password: '',
 	});
 	const [show, setShow] = React.useState(false);
+	const [loading, setLoading] = React.useState(false);
+	const toast = useToast();
 
-	const hanldeSignUp = () => {
-		console.log(formValues);
+	const hanldeSignIn = () => {
+		setLoading(true);
+
+		const query = `email=${formValues.email}&password=${formValues.password}`;
+		fetch(`http://192.168.0.101:5000/signin?${query}`)
+			.then(res => res.json())
+			.then(async data => {
+				if (data.error) {
+					toast.show({
+						render: () => {
+							return (
+								<Box
+									bg="error.500"
+									px="2"
+									py="1"
+									rounded="sm"
+									mb={5}>
+									<Text fontSize={20} color={'white'}>
+										{data.error}
+									</Text>
+								</Box>
+							);
+						},
+						placement: 'top',
+					});
+				} else {
+					toast.show({
+						description: 'Signed in successfully',
+						placement: 'top',
+					});
+					await AsyncStorage.setItem('user', JSON.stringify(data));
+					navigation.replace('Onboarding');
+				}
+				setLoading(false);
+			})
+			.catch(err => {
+				console.log('Error signing in:', err);
+				setLoading(false);
+			});
 	};
 	return (
 		<ScrollView>
@@ -106,14 +149,19 @@ const SignIn = ({ navigation }) => {
 				alignSelf={'center'}
 				backgroundColor={'emerald.600'}
 				_pressed={{ opacity: 80 }}
-				onPress={hanldeSignUp}>
-				<Text
-					fontSize={20}
-					color={'white'}
-					fontWeight={'bold'}
-					textAlign={'center'}>
-					Sign In
-				</Text>
+				onPress={hanldeSignIn}
+				disabled={loading}>
+				{loading ? (
+					<Spinner color="white" />
+				) : (
+					<Text
+						fontSize={20}
+						color={'white'}
+						fontWeight={'bold'}
+						textAlign={'center'}>
+						Sign In
+					</Text>
+				)}
 			</Pressable>
 
 			<Text textAlign={'center'} marginTop={20} fontSize={20}>

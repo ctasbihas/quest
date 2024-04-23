@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
+	Box,
 	Icon,
 	Input,
 	Pressable,
@@ -41,15 +42,31 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 			}),
 		})
 			.then(response => response.json())
-			.then(data => {
+			.then(async data => {
 				if (data.error) {
-					console.log(data);
+					toast.show({
+						render: () => {
+							return (
+								<Box
+									bg="error.500"
+									px="2"
+									py="1"
+									rounded="sm"
+									mb={5}>
+									<Text fontSize={20} color={'white'}>
+										{data.error}
+									</Text>
+								</Box>
+							);
+						},
+						placement: 'top',
+					});
 				} else {
 					toast.show({
 						description: 'Account created successfully',
 					});
-					AsyncStorage.setItem('user-email', data.email);
-					navigation.replace('SignIn');
+					await AsyncStorage.setItem('user', JSON.stringify(data));
+					navigation.replace('Onboarding');
 				}
 				setLoading(false);
 			})
