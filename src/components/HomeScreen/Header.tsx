@@ -1,10 +1,9 @@
-import { HStack, IconButton, Image, Text } from 'native-base';
+import { Avatar, HStack, IconButton, Text } from 'native-base';
 import React from 'react';
-import { Dimensions } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { width } from '../../utils';
 
 const Header = () => {
-	const { width } = Dimensions.get('screen');
 	return (
 		<HStack
 			alignItems={'center'}
@@ -29,18 +28,15 @@ const Header = () => {
 			<Text fontSize={24} color={'white'}>
 				Home
 			</Text>
-			<Image
+			<Avatar
 				width={12}
 				height={12}
-				resizeMode="cover"
 				borderRadius={'full'}
-				borderWidth={2}
-				borderColor={'emerald.700'}
 				source={{
-					uri: 'https://wallpaperaccess.com/full/317501.jpg',
-				}}
-				alt={'Alternate Text ' + 'xs'}
-			/>
+					uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+				}}>
+				Me
+			</Avatar>
 		</HStack>
 	);
 };
