@@ -1,15 +1,14 @@
 import { Avatar, Box, FlatList, HStack, Text, VStack } from 'native-base';
 import React from 'react';
-import { messages } from '../../utils/fakeData';
+import { chats } from '../../utils/fakeData';
 
 const Messages = () => {
 	return (
 		<FlatList
 			backgroundColor={'#FFFFFF'}
-			borderTopRadius={32}
-			padding={3}
-			contentContainerStyle={{ paddingBottom: 50 }}
-			data={messages}
+			borderTopRadius={20}
+			contentContainerStyle={{ padding: 15, paddingBottom: 95 }}
+			data={chats}
 			renderItem={({ item, index }) => (
 				<HStack
 					justifyContent={'space-between'}

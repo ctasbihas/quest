@@ -29,7 +29,7 @@ const stories = [
 	},
 ];
 
-const messages = [
+const chats = [
 	{
 		id: 0,
 		userImage:
@@ -147,4 +147,4 @@ const messages = [
 	},
 ];
 
-export { messages, stories };
+export { chats, stories };
