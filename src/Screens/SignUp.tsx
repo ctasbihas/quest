@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
 	Box,
 	Icon,
@@ -13,8 +12,10 @@ import {
 } from 'native-base';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useUserContext } from '../context/UserContext';
 
 const SignUp = ({ navigation }: { navigation: any }) => {
+	const { storeUserData } = useUserContext();
 	const [formValues, setFormValues] = React.useState({
 		name: '',
 		email: '',
@@ -68,8 +69,7 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 						description: 'Account created successfully',
 						placement: 'top',
 					});
-					await AsyncStorage.setItem('user', JSON.stringify(data));
-					navigation.replace('HomeScreen');
+					storeUserData(data);
 				}
 			})
 			.catch(error => {
