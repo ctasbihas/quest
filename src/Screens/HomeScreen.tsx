@@ -1,14 +1,16 @@
-import { Container } from 'native-base';
+import { VStack } from 'native-base';
 import React from 'react';
 import Header from '../components/HomeScreen/Header';
+import Messages from '../components/HomeScreen/Messages';
 import Stories from '../components/HomeScreen/Stories';
 
 const HomeScreen = () => {
 	return (
-		<Container>
+		<VStack bgColor={'#000E08'} flex={1}>
 			<Header />
 			<Stories />
-		</Container>
+			<Messages />
+		</VStack>
 	);
 };
 

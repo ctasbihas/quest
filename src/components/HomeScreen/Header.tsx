@@ -8,7 +8,6 @@ const Header = () => {
 		<HStack
 			alignItems={'center'}
 			justifyContent={'space-between'}
-			bgColor={'#000E08'}
 			paddingX={5}
 			paddingY={3}
 			style={{ width }}>

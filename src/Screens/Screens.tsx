@@ -14,7 +14,6 @@ const Stack = createStackNavigator();
 
 const Screens = () => {
 	const { user, isLoading } = useUserContext();
-	console.log(user.email, isLoading);
 
 	if (!isLoading) {
 		SplashScreen.hide();
