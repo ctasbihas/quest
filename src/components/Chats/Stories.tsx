@@ -13,7 +13,7 @@ import { stories } from '../../utils/fakeData';
 
 const Stories = () => {
 	return (
-		<HStack paddingY={5} style={{ width }}>
+		<HStack paddingBottom={5} style={{ width }}>
 			<FlatList
 				data={stories}
 				horizontal

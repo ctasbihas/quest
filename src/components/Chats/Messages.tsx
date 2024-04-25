@@ -2,11 +2,12 @@ import { Avatar, Box, FlatList, HStack, Text, VStack } from 'native-base';
 import React from 'react';
 import { chats } from '../../utils/fakeData';
 
-const Messages = () => {
+const Chats = () => {
 	return (
 		<FlatList
 			backgroundColor={'#FFFFFF'}
 			borderTopRadius={20}
+			// eslint-disable-next-line react-native/no-inline-styles
 			contentContainerStyle={{ padding: 15, paddingBottom: 95 }}
 			data={chats}
 			renderItem={({ item, index }) => (
@@ -56,4 +57,4 @@ const Messages = () => {
 	);
 };
 
-export default Messages;
+export default Chats;

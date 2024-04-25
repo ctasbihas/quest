@@ -10,7 +10,12 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useUserContext } from '../context/UserContext';
+import Calls from './Calls';
 import Chats from './Chats';
+import Onboarding from './Onboarding';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import VerifyEmail from './VerifyEmail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,7 +74,7 @@ const Screens = () => {
 					/>
 					<Tab.Screen
 						name="Calls"
-						component={Chats}
+						component={Calls}
 						options={{
 							headerShown: false,
 							tabBarShowLabel: false,

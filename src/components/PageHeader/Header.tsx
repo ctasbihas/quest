@@ -1,15 +1,21 @@
-import { Avatar, HStack, IconButton, Text } from 'native-base';
-import React from 'react';
+import { HStack, IconButton, Text } from 'native-base';
+import React, { ReactNode } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { width } from '../../utils';
 
-const Header = () => {
+const Header = ({
+	title,
+	rightContent,
+}: {
+	title: string;
+	rightContent: ReactNode;
+}) => {
 	return (
 		<HStack
 			alignItems={'center'}
 			justifyContent={'space-between'}
 			paddingX={5}
-			paddingY={3}
+			paddingY={8}
 			style={{ width }}>
 			<IconButton
 				colorScheme="light"
@@ -25,17 +31,9 @@ const Header = () => {
 				}}
 			/>
 			<Text fontSize={24} color={'white'}>
-				Home
+				{title}
 			</Text>
-			<Avatar
-				width={12}
-				height={12}
-				borderRadius={'full'}
-				source={{
-					uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-				}}>
-				Me
-			</Avatar>
+			{rightContent}
 		</HStack>
 	);
 };
