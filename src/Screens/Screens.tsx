@@ -4,6 +4,7 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { useUserContext } from '../context/UserContext';
+import HomeScreen from './HomeScreen';
 import Onboarding from './Onboarding';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -26,13 +27,8 @@ const Screens = () => {
 				{user.email ? (
 					<Stack.Screen
 						name="HomeScreen"
-						component={VerifyEmail}
-						options={{
-							headerTitle: 'Home',
-							headerTitleAlign: 'center',
-							headerShadowVisible: false,
-							headerTitleStyle: { fontSize: 28 },
-						}}
+						component={HomeScreen}
+						options={{ headerShown: false }}
 					/>
 				) : (
 					<>
