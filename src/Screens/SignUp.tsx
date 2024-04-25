@@ -5,6 +5,7 @@ import {
 	Input,
 	Pressable,
 	ScrollView,
+	Spinner,
 	Stack,
 	Text,
 	VStack,
@@ -43,6 +44,7 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 		})
 			.then(response => response.json())
 			.then(async data => {
+				setLoading(false);
 				if (data.error) {
 					toast.show({
 						render: () => {
@@ -64,11 +66,11 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 				} else {
 					toast.show({
 						description: 'Account created successfully',
+						placement: 'top',
 					});
 					await AsyncStorage.setItem('user', JSON.stringify(data));
-					navigation.replace('Onboarding');
+					navigation.replace('HomeScreen');
 				}
-				setLoading(false);
 			})
 			.catch(error => {
 				console.error('Error:', error.message);
@@ -243,13 +245,17 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 				_pressed={{ opacity: 80 }}
 				onPress={hanldeSignUp}
 				disabled={loading}>
-				<Text
-					fontSize={20}
-					color={'white'}
-					fontWeight={'bold'}
-					textAlign={'center'}>
-					{loading ? 'Loading...' : 'Sign Up'}
-				</Text>
+				{loading ? (
+					<Spinner color="white" />
+				) : (
+					<Text
+						fontSize={20}
+						color={'white'}
+						fontWeight={'bold'}
+						textAlign={'center'}>
+						Sign Up
+					</Text>
+				)}
 			</Pressable>
 
 			<Text textAlign={'center'} marginTop={20} fontSize={20}>

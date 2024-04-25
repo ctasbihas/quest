@@ -54,7 +54,7 @@ const SignIn = ({ navigation }: any) => {
 						placement: 'top',
 					});
 					await AsyncStorage.setItem('user', JSON.stringify(data));
-					navigation.replace('Onboarding');
+					navigation.replace('HomeScreen');
 				}
 				setLoading(false);
 			})

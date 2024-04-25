@@ -1,12 +1,33 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 import express, { Request, Response } from 'express';
+import nodemailer from 'nodemailer';
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 const prisma = new PrismaClient();
 
 app.use(express.json());
+
+// Nodemailer configuration
+const transporter = nodemailer.createTransport({
+	host: 'smtp.gmail.com',
+	port: 587,
+	secure: true,
+	service: 'gmail',
+	auth: {
+		user: 'ctasbihas@gmail.com',
+		pass: 'prid xrso wqgm zokx',
+	},
+});
+
+// Function to generate OTP
+function generateOTP() {
+	const otp = crypto.randomInt(100000, 999999); // generates six-digit random number
+	return otp.toString();
+}
 
 app.get('/', (req: Request, res: Response) => {
 	res.send('Hello, World!');
@@ -64,6 +85,28 @@ app.get('/signin', async (req: Request, res: Response) => {
 	} catch (error) {
 		console.error('Error signing in:', error);
 		res.status(500).json({ error: 'Error signing in. Please try again.' });
+	}
+});
+app.post('/sendOtp', async (req: Request, res: Response) => {
+	const { toEmail } = req.body;
+	const otp = generateOTP();
+
+	const mailOptions = {
+		from: 'quest@gmail.com',
+		to: toEmail,
+		subject: 'Your Verification OTP from Quest',
+		text: `Your OTP is ${otp}. This OTP is valid for 10 minutes.`,
+		html: `<p>Your OTP is <strong>${otp}</strong>. This OTP is valid for 10 minutes.</p>`,
+	};
+
+	try {
+		await transporter.sendMail(mailOptions);
+
+		const otpStore = { otp: otp, timestamp: Date.now() };
+		res.send({ message: 'OTP sent successfully!', otpStore });
+	} catch (error) {
+		console.error('Error sending OTP:', error);
+		res.status(500).send({ error: 'Error sending OTP' });
 	}
 });
 
