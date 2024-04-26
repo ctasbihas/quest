@@ -8,10 +8,12 @@ import {
 } from 'native-base';
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { useUserContext } from '../../context/UserContext';
 import { width } from '../../utils';
 import { stories } from '../../utils/fakeData';
 
 const Stories = () => {
+	const { user } = useUserContext();
 	return (
 		<HStack paddingBottom={5} style={{ width }}>
 			<FlatList
@@ -31,7 +33,7 @@ const Stories = () => {
 									backgroundColor={'#000E08'}
 									padding={1}
 									source={{
-										uri: item.userImage,
+										uri: user.profilePic as string,
 									}}
 								/>
 								<IconButton

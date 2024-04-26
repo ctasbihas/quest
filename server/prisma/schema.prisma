@@ -10,6 +10,7 @@ datasource db {
 model User {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   name          String
+  profilePic    String   @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC_GTSOMv5MWxOHBLROf2ExOHFKpZpaDqQRw&s")
   email         String   @unique
   emailVerified Boolean  @default(false)
   password      String

@@ -10,6 +10,7 @@ import React, {
 interface User {
 	id: String;
 	name: String;
+	profilePic: String;
 	email: String;
 	emailVerified: Boolean;
 	password: String;
@@ -32,6 +33,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 	const [user, setUser] = useState<User>({
 		id: '',
 		name: '',
+		profilePic: '',
 		email: '',
 		emailVerified: false,
 		password: '',
@@ -46,13 +48,17 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 				const userData = await AsyncStorage.getItem('user');
 
 				if (userData) {
-					setUser(JSON.parse(userData) as User);
+					const parsedUser = JSON.parse(userData);
+					const query = `email=${parsedUser.email}&password=${parsedUser.password}`;
+					fetch('http://192.168.0.102:5000/signin?' + query)
+						.then(res => res.json())
+						.then(data => {
+							setUser(data);
+						});
 				}
 				setIsLoading(false);
 			} catch (error) {
 				console.error('Error fetching user data:', error);
-			} finally {
-				setIsLoading(false);
 			}
 		};
 
@@ -74,6 +80,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 			setUser({
 				id: '',
 				name: '',
+				profilePic: '',
 				email: '',
 				emailVerified: false,
 				password: '',

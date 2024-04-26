@@ -24,9 +24,11 @@ const Tab = createBottomTabNavigator();
 const Screens = () => {
 	const { user, isLoading } = useUserContext();
 
-	if (!isLoading) {
-		SplashScreen.hide();
-	}
+	React.useLayoutEffect(() => {
+		if (!isLoading) {
+			SplashScreen.hide();
+		}
+	}, [isLoading]);
 
 	return (
 		<NavigationContainer>

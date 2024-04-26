@@ -77,7 +77,7 @@ app.get('/signin', async (req: Request, res: Response) => {
 			password as string,
 			user.password as string
 		);
-		if (!isPassCorrect) {
+		if (user.password !== password && !isPassCorrect) {
 			return res.status(400).json({ error: 'Invalid password' });
 		}
 
