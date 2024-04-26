@@ -12,6 +12,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useUserContext } from '../context/UserContext';
 import Calls from './Calls';
 import Chats from './Chats';
+import Contacts from './Contacts';
 import Onboarding from './Onboarding';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -96,7 +97,7 @@ const Screens = () => {
 					/>
 					<Tab.Screen
 						name="Contacts"
-						component={Chats}
+						component={Contacts}
 						options={{
 							headerShown: false,
 							tabBarShowLabel: false,

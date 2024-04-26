@@ -18,8 +18,8 @@ const Stories = () => {
 				data={stories}
 				horizontal
 				keyExtractor={story => story.id.toString()}
-				renderItem={story =>
-					story.item.id === 0 ? (
+				renderItem={({ item, index }) =>
+					!index ? (
 						<VStack alignItems={'center'} space={2} marginLeft={5}>
 							<VStack>
 								<Avatar
@@ -31,7 +31,7 @@ const Stories = () => {
 									backgroundColor={'#000E08'}
 									padding={1}
 									source={{
-										uri: story.item.userImage,
+										uri: item.userImage,
 									}}
 								/>
 								<IconButton
@@ -65,10 +65,10 @@ const Stories = () => {
 								borderColor={'green.700'}
 								padding={1}
 								backgroundColor={'dark.50'}
-								source={{ uri: story.item.userImage }}
+								source={{ uri: item.userImage }}
 							/>
 							<Text fontSize={18} color={'white'}>
-								{story.item.userName.split(' ')[0]}
+								{item.userName.split(' ')[0]}
 							</Text>
 						</VStack>
 					)
