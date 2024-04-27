@@ -14,6 +14,7 @@ import Calls from './Calls';
 import Chats from './Chats';
 import Contacts from './Contacts';
 import Onboarding from './Onboarding';
+import Settings from './Settings';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import VerifyEmail from './VerifyEmail';
@@ -121,7 +122,7 @@ const Screens = () => {
 					/>
 					<Tab.Screen
 						name="Settings"
-						component={Chats}
+						component={Settings}
 						options={{
 							headerShown: false,
 							tabBarShowLabel: false,
