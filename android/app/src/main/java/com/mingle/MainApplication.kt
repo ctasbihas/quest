@@ -1,4 +1,4 @@
-package com.mingle
+package com.quest
 
 import android.app.Application
 import com.facebook.react.PackageList
