@@ -28,7 +28,7 @@ const SignIn = ({ navigation }: any) => {
 		setLoading(true);
 
 		const query = `email=${formValues.email}&password=${formValues.password}`;
-		fetch(`http://192.168.0.101:5000/signin?${query}`)
+		fetch(`${process.env.SERVER_URL}/signin?${query}`)
 			.then(res => res.json())
 			.then(async data => {
 				if (data.error) {

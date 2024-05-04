@@ -18,11 +18,12 @@ const Stories = () => {
 		<HStack paddingBottom={5} style={{ width }}>
 			<FlatList
 				data={stories}
+				showsHorizontalScrollIndicator={false}
 				horizontal
 				keyExtractor={story => story.id.toString()}
 				renderItem={({ item, index }) =>
 					!index ? (
-						<VStack alignItems={'center'} space={2} marginLeft={5}>
+						<VStack alignItems={'center'} space={2} marginX={5}>
 							<VStack>
 								<Avatar
 									width={20}
@@ -58,7 +59,7 @@ const Stories = () => {
 							</Text>
 						</VStack>
 					) : (
-						<VStack alignItems={'center'} space={2} marginLeft={5}>
+						<VStack alignItems={'center'} space={2} marginRight={5}>
 							<Avatar
 								width={20}
 								height={20}

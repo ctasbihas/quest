@@ -32,7 +32,7 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 	const hanldeSignUp = () => {
 		setLoading(true);
 
-		fetch('http://192.168.0.101:5000/createUser', {
+		fetch(`${process.env.SERVER_URL}/createUser`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
