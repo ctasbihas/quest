@@ -49,12 +49,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
 				if (userData) {
 					const parsedUser = JSON.parse(userData);
-					const query = `email=${parsedUser.email}&password=${parsedUser.password}`;
-					fetch('http://192.168.0.102:5000/signin?' + query)
-						.then(res => res.json())
-						.then(data => {
-							setUser(data);
-						});
+					setUser(parsedUser);
 				}
 				setIsLoading(false);
 			} catch (error) {

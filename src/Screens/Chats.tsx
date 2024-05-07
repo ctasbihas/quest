@@ -1,11 +1,11 @@
 import { Avatar, VStack } from 'native-base';
 import React from 'react';
-import Messages from '../components/Chats/Messages';
+import Messages from '../components/Chats/Chats';
 import Stories from '../components/Chats/Stories';
 import Header from '../components/PageHeader/Header';
 import { useUserContext } from '../context/UserContext';
 
-const Chats = () => {
+const Chats = ({ navigation }) => {
 	const { user } = useUserContext();
 	return (
 		<VStack bgColor={'#000E08'} flex={1}>
@@ -24,7 +24,7 @@ const Chats = () => {
 				}
 			/>
 			<Stories />
-			<Messages />
+			<Messages navigation={navigation} />
 		</VStack>
 	);
 };

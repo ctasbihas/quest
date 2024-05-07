@@ -2,19 +2,21 @@ import { Avatar, Box, FlatList, HStack, Text, VStack } from 'native-base';
 import React from 'react';
 import { chats } from '../../utils/fakeData';
 
-const Chats = () => {
+const Chats = ({ navigation }) => {
 	return (
 		<FlatList
 			backgroundColor={'#FFFFFF'}
 			borderTopRadius={20}
 			// eslint-disable-next-line react-native/no-inline-styles
-			contentContainerStyle={{ padding: 15, paddingBottom: 95 }}
+			contentContainerStyle={{ paddingBottom: 95, paddingTop: 10 }}
 			data={chats}
-			renderItem={({ item, index }) => (
+			renderItem={({ item }) => (
 				<HStack
 					justifyContent={'space-between'}
 					alignItems={'center'}
-					marginTop={index && '5'}>
+					onTouchEnd={() => navigation.navigate('Message', item)}
+					paddingY={'2.5'}
+					paddingX={'3'}>
 					<HStack alignItems={'center'}>
 						<Avatar
 							width={16}

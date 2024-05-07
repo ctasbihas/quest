@@ -13,6 +13,7 @@ import { useUserContext } from '../context/UserContext';
 import Calls from './Calls';
 import Chats from './Chats';
 import Contacts from './Contacts';
+import Message from './Message';
 import Onboarding from './Onboarding';
 import Settings from './Settings';
 import SignIn from './SignIn';
@@ -21,6 +22,119 @@ import VerifyEmail from './VerifyEmail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const TabNavigator = () => {
+	return (
+		<Tab.Navigator
+			screenOptions={{
+				tabBarStyle: {
+					position: 'absolute',
+					bottom: 10,
+					left: 10,
+					right: 10,
+					borderRadius: 20,
+					height: 70,
+					backgroundColor: '#FFFFFF',
+					shadowColor: '#000',
+					shadowOffset: {
+						width: 0,
+						height: 2,
+					},
+					shadowOpacity: 0.25,
+					shadowRadius: 3.84,
+					elevation: 5,
+				},
+			}}>
+			<Tab.Screen
+				name="Chats"
+				component={Chats}
+				options={{
+					headerShown: false,
+					tabBarShowLabel: false,
+					tabBarIcon: ({ focused }) => (
+						<VStack alignItems={'center'}>
+							<AntDesign
+								name="message1"
+								size={24}
+								color={focused ? '#24786D' : '#797C7B'}
+							/>
+							<Text
+								color={focused ? '#24786D' : '#797C7B'}
+								fontSize={16}>
+								Chats
+							</Text>
+						</VStack>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="Calls"
+				component={Calls}
+				options={{
+					headerShown: false,
+					tabBarShowLabel: false,
+					tabBarIcon: ({ focused }) => (
+						<VStack alignItems={'center'}>
+							<Feather
+								name="phone-call"
+								size={24}
+								color={focused ? '#24786D' : '#797C7B'}
+							/>
+							<Text
+								color={focused ? '#24786D' : '#797C7B'}
+								fontSize={16}>
+								Calls
+							</Text>
+						</VStack>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="Contacts"
+				component={Contacts}
+				options={{
+					headerShown: false,
+					tabBarShowLabel: false,
+					tabBarIcon: ({ focused }) => (
+						<VStack alignItems={'center'}>
+							<MaterialCommunityIcons
+								name="account-circle-outline"
+								size={24}
+								color={focused ? '#24786D' : '#797C7B'}
+							/>
+							<Text
+								color={focused ? '#24786D' : '#797C7B'}
+								fontSize={16}>
+								Contacts
+							</Text>
+						</VStack>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="Settings"
+				component={Settings}
+				options={{
+					headerShown: false,
+					tabBarShowLabel: false,
+					tabBarIcon: ({ focused }) => (
+						<VStack alignItems={'center'}>
+							<Feather
+								name="settings"
+								size={24}
+								color={focused ? '#24786D' : '#797C7B'}
+							/>
+							<Text
+								color={focused ? '#24786D' : '#797C7B'}
+								fontSize={16}>
+								Settings
+							</Text>
+						</VStack>
+					),
+				}}
+			/>
+		</Tab.Navigator>
+	);
+};
 
 const Screens = () => {
 	const { user, isLoading } = useUserContext();
@@ -33,156 +147,57 @@ const Screens = () => {
 
 	return (
 		<NavigationContainer>
-			{user.email && (
-				<Tab.Navigator
-					screenOptions={{
-						tabBarStyle: {
-							position: 'absolute',
-							bottom: 10,
-							left: 10,
-							right: 10,
-							borderRadius: 20,
-							height: 70,
-							backgroundColor: '#FFFFFF',
-							shadowColor: '#000',
-							shadowOffset: {
-								width: 0,
-								height: 2,
-							},
-							shadowOpacity: 0.25,
-							shadowRadius: 3.84,
-							elevation: 5,
-						},
-					}}>
-					<Tab.Screen
-						name="Chats"
-						component={Chats}
-						options={{
-							headerShown: false,
-							tabBarShowLabel: false,
-							tabBarIcon: ({ focused }) => (
-								<VStack alignItems={'center'}>
-									<AntDesign
-										name="message1"
-										size={24}
-										color={focused ? '#24786D' : '#797C7B'}
-									/>
-									<Text
-										color={focused ? '#24786D' : '#797C7B'}
-										fontSize={16}>
-										Chats
-									</Text>
-								</VStack>
-							),
-						}}
-					/>
-					<Tab.Screen
-						name="Calls"
-						component={Calls}
-						options={{
-							headerShown: false,
-							tabBarShowLabel: false,
-							tabBarIcon: ({ focused }) => (
-								<VStack alignItems={'center'}>
-									<Feather
-										name="phone-call"
-										size={24}
-										color={focused ? '#24786D' : '#797C7B'}
-									/>
-									<Text
-										color={focused ? '#24786D' : '#797C7B'}
-										fontSize={16}>
-										Calls
-									</Text>
-								</VStack>
-							),
-						}}
-					/>
-					<Tab.Screen
-						name="Contacts"
-						component={Contacts}
-						options={{
-							headerShown: false,
-							tabBarShowLabel: false,
-							tabBarIcon: ({ focused }) => (
-								<VStack alignItems={'center'}>
-									<MaterialCommunityIcons
-										name="account-circle-outline"
-										size={24}
-										color={focused ? '#24786D' : '#797C7B'}
-									/>
-									<Text
-										color={focused ? '#24786D' : '#797C7B'}
-										fontSize={16}>
-										Contacts
-									</Text>
-								</VStack>
-							),
-						}}
-					/>
-					<Tab.Screen
-						name="Settings"
-						component={Settings}
-						options={{
-							headerShown: false,
-							tabBarShowLabel: false,
-							tabBarIcon: ({ focused }) => (
-								<VStack alignItems={'center'}>
-									<Feather
-										name="settings"
-										size={24}
-										color={focused ? '#24786D' : '#797C7B'}
-									/>
-									<Text
-										color={focused ? '#24786D' : '#797C7B'}
-										fontSize={16}>
-										Settings
-									</Text>
-								</VStack>
-							),
-						}}
-					/>
-				</Tab.Navigator>
-			)}
-			{!user.email && (
-				<Stack.Navigator>
-					<Stack.Screen
-						name="Onboarding"
-						component={Onboarding}
-						options={{ headerShown: false }}
-					/>
-					<Stack.Screen
-						name="SignUp"
-						component={SignUp}
-						options={{
-							headerTitle: 'Sign Up With Email',
-							headerTitleAlign: 'center',
-							headerShadowVisible: false,
-							headerTitleStyle: { fontSize: 28 },
-						}}
-					/>
-					<Stack.Screen
-						name="VerifyEmail"
-						component={VerifyEmail}
-						options={{
-							headerTitle: 'OTP Verification',
-							headerTitleAlign: 'center',
-							headerShadowVisible: false,
-							headerTitleStyle: { fontSize: 28 },
-						}}
-					/>
-					<Stack.Screen
-						name="SignIn"
-						component={SignIn}
-						options={{
-							headerTitle: 'Sign In To Quest',
-							headerTitleAlign: 'center',
-							headerShadowVisible: false,
-							headerTitleStyle: { fontSize: 28 },
-						}}
-					/>
-				</Stack.Navigator>
-			)}
+			<Stack.Navigator initialRouteName="TabNavigator">
+				<Stack.Screen
+					name="Message"
+					component={Message}
+					options={{ headerShown: false }}
+				/>
+				{!user.email && (
+					<>
+						<Stack.Screen
+							name="Onboarding"
+							component={Onboarding}
+							options={{ headerShown: false }}
+						/>
+						<Stack.Screen
+							name="SignUp"
+							component={SignUp}
+							options={{
+								headerTitle: 'Sign Up With Email',
+								headerTitleAlign: 'center',
+								headerShadowVisible: false,
+								headerTitleStyle: { fontSize: 28 },
+							}}
+						/>
+						<Stack.Screen
+							name="VerifyEmail"
+							component={VerifyEmail}
+							options={{
+								headerTitle: 'OTP Verification',
+								headerTitleAlign: 'center',
+								headerShadowVisible: false,
+								headerTitleStyle: { fontSize: 28 },
+							}}
+						/>
+						<Stack.Screen
+							name="SignIn"
+							component={SignIn}
+							options={{
+								headerTitle: 'Sign In To Quest',
+								headerTitleAlign: 'center',
+								headerShadowVisible: false,
+								headerTitleStyle: { fontSize: 28 },
+							}}
+						/>
+					</>
+				)}
+				<Stack.Screen
+					name="TabNavigator"
+					component={TabNavigator}
+					options={{ headerShown: false }}
+				/>
+			</Stack.Navigator>
 		</NavigationContainer>
 	);
 };
