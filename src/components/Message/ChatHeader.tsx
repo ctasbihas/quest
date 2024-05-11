@@ -9,7 +9,8 @@ const ChatHeader = ({ chatUser, navigation }: any) => {
 		<HStack
 			alignItems={'center'}
 			justifyContent={'space-between'}
-			padding={2}
+			padding={1}
+			paddingRight={2}
 			borderBottomWidth={1}
 			borderBottomColor={'gray.500'}>
 			<HStack alignItems={'center'} flexWrap={'wrap'}>
