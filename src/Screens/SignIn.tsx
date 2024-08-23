@@ -24,7 +24,7 @@ const SignIn = ({ navigation }: any) => {
 	const [loading, setLoading] = React.useState(false);
 	const toast = useToast();
 
-	const hanldeSignIn = () => {
+	const handleSignIn = () => {
 		setLoading(true);
 
 		const query = `email=${formValues.email}&password=${formValues.password}`;
@@ -60,6 +60,9 @@ const SignIn = ({ navigation }: any) => {
 			})
 			.catch(err => {
 				console.log('Error signing in:', err);
+				setLoading(false);
+			})
+			.finally(() => {
 				setLoading(false);
 			});
 	};
@@ -149,7 +152,7 @@ const SignIn = ({ navigation }: any) => {
 				alignSelf={'center'}
 				backgroundColor={'emerald.600'}
 				_pressed={{ opacity: 80 }}
-				onPress={hanldeSignIn}
+				onPress={handleSignIn}
 				disabled={loading}>
 				{loading ? (
 					<Spinner color="white" />

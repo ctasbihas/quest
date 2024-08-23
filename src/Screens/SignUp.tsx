@@ -29,7 +29,7 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 	const [loading, setLoading] = React.useState(false);
 	const toast = useToast();
 
-	const hanldeSignUp = () => {
+	const handleSignUp = () => {
 		setLoading(true);
 
 		fetch(`${process.env.SERVER_URL}/createUser`, {
@@ -74,6 +74,9 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 			})
 			.catch(error => {
 				console.error('Error:', error.message);
+				setLoading(false);
+			})
+			.finally(() => {
 				setLoading(false);
 			});
 	};
@@ -243,7 +246,7 @@ const SignUp = ({ navigation }: { navigation: any }) => {
 				alignSelf={'center'}
 				backgroundColor={'emerald.600'}
 				_pressed={{ opacity: 80 }}
-				onPress={hanldeSignUp}
+				onPress={handleSignUp}
 				disabled={loading}>
 				{loading ? (
 					<Spinner color="white" />

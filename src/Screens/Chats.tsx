@@ -7,6 +7,7 @@ import { useUserContext } from '../context/UserContext';
 
 const Chats = ({ navigation }) => {
 	const { user } = useUserContext();
+	console.log(user);
 	return (
 		<VStack bgColor={'#000E08'} flex={1}>
 			<Header
