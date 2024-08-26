@@ -1,11 +1,13 @@
 import { Avatar, VStack } from 'native-base';
 import React from 'react';
-import Messages from '../components/Chats/Chats';
+import Conversations from '../components/Chats/Conversations';
 import Stories from '../components/Chats/Stories';
 import Header from '../components/PageHeader/Header';
 import { useUserContext } from '../context/UserContext';
 
-const Chats = ({ navigation }) => {
+import { NavigationProp } from '@react-navigation/native';
+
+const Chats = ({ navigation }: { navigation: NavigationProp<any> }) => {
 	const { user } = useUserContext();
 
 	if (user) {
@@ -26,7 +28,7 @@ const Chats = ({ navigation }) => {
 					}
 				/>
 				<Stories />
-				<Messages navigation={navigation} />
+				<Conversations navigation={navigation} />
 			</VStack>
 		);
 	}

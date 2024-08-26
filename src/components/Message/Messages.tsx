@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useUserContext } from '../../context/UserContext';
 import { messages } from '../../utils/fakeData';
 
-const Messages = () => {
+const Messages = ({ chatUser }: any) => {
 	const { user } = useUserContext();
 
 	if (!user) {

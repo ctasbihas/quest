@@ -1,10 +1,12 @@
+import { useNavigation } from '@react-navigation/native';
 import { Avatar, HStack, Icon, Pressable, Text, VStack } from 'native-base';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const ChatHeader = ({ chatUser, navigation }: any) => {
+const ChatHeader = ({ chatUser }: any) => {
+	const navigation = useNavigation();
 	return (
 		<HStack
 			alignItems={'center'}

@@ -2,7 +2,9 @@ import { Avatar, Box, FlatList, HStack, Text, VStack } from 'native-base';
 import React from 'react';
 import { chats } from '../../utils/fakeData';
 
-const Chats = ({ navigation }: any) => {
+import { NavigationProp } from '@react-navigation/native';
+
+const Conversations = ({ navigation }: { navigation: NavigationProp<any> }) => {
 	return (
 		<FlatList
 			backgroundColor={'#FFFFFF'}
@@ -59,4 +61,4 @@ const Chats = ({ navigation }: any) => {
 	);
 };
 
-export default Chats;
+export default Conversations;

@@ -4,11 +4,11 @@ import React from 'react';
 import ChatHeader from '../components/Message/ChatHeader';
 import Messages from '../components/Message/Messages';
 
-const Message = ({ navigation }) => {
+const Message = () => {
 	const { params } = useRoute();
 	return (
 		<VStack flex={1}>
-			<ChatHeader chatUser={params} navigation={navigation} />
+			<ChatHeader chatUser={params} />
 			<Messages chatUser={params} />
 		</VStack>
 	);
