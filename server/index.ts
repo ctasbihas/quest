@@ -34,7 +34,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // User API routes
-app.post('/createUser', async (req: Request, res: Response) => {
+app.post('/register', async (req: Request, res: Response) => {
 	const { name, email, password } = req.body;
 
 	if (!name || !email || !password) {
@@ -61,7 +61,7 @@ app.post('/createUser', async (req: Request, res: Response) => {
 
 	res.send(user);
 });
-app.get('/signin', async (req: Request, res: Response) => {
+app.get('/login', async (req: Request, res: Response) => {
 	const { email, password } = req.query;
 	try {
 		const user = await prisma.user.findUnique({
@@ -83,8 +83,8 @@ app.get('/signin', async (req: Request, res: Response) => {
 
 		res.json(user);
 	} catch (error) {
-		console.error('Error signing in:', error);
-		res.status(500).json({ error: 'Error signing in. Please try again.' });
+		console.error('Error Logging in:', error);
+		res.status(500).json({ error: 'Error logging in. Please try again.' });
 	}
 });
 app.post('/sendOtp', async (req: Request, res: Response) => {

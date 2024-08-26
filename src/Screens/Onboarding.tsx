@@ -41,7 +41,7 @@ const Onboarding = ({ navigation }: { navigation: any }) => {
 					<Divider w={screenWidth * 0.4} />
 				</View>
 				<Pressable
-					onPress={() => navigation.navigate('SignUp')}
+					onPress={() => navigation.navigate('Auth')}
 					backgroundColor={'white'}
 					paddingY={3}
 					borderRadius={'md'}>

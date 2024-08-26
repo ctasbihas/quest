@@ -10,6 +10,10 @@ import { width } from '../utils';
 const Settings = () => {
 	const { user } = useUserContext();
 
+	if (!user) {
+		return null;
+	}
+
 	const settings = [
 		{
 			id: 1,
@@ -109,7 +113,7 @@ const Settings = () => {
 						width={20}
 						height={20}
 						source={{
-							uri: user.profilePic as string,
+							uri: user?.profilePic as string,
 						}}
 					/>
 					<VStack marginLeft={2}>

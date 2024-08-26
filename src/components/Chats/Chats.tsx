@@ -2,7 +2,7 @@ import { Avatar, Box, FlatList, HStack, Text, VStack } from 'native-base';
 import React from 'react';
 import { chats } from '../../utils/fakeData';
 
-const Chats = ({ navigation }) => {
+const Chats = ({ navigation }: any) => {
 	return (
 		<FlatList
 			backgroundColor={'#FFFFFF'}

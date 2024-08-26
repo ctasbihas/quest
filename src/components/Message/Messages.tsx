@@ -5,8 +5,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useUserContext } from '../../context/UserContext';
 import { messages } from '../../utils/fakeData';
 
-const Messages = ({ chatUser }) => {
+const Messages = () => {
 	const { user } = useUserContext();
+
+	if (!user) {
+		return null;
+	}
 
 	const convertToTime = (timestamp: string) => {
 		const date = new Date(timestamp);

@@ -19,7 +19,7 @@ interface User {
 }
 
 interface UserContextProps {
-	user: User;
+	user: User | null;
 	isLoading: Boolean;
 	storeUserData: (data: User) => void;
 	removeUserData: () => void;
@@ -30,16 +30,7 @@ export const UserContext = createContext<UserContextProps | undefined>(
 );
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-	const [user, setUser] = useState<User>({
-		id: '',
-		name: '',
-		profilePic: '',
-		email: '',
-		emailVerified: false,
-		password: '',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	});
+	const [user, setUser] = useState<User | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -50,10 +41,22 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 				if (userData) {
 					const parsedUser = JSON.parse(userData);
 					setUser(parsedUser);
+				} else {
+					setUser({
+						id: '',
+						name: '',
+						profilePic: '',
+						email: '',
+						emailVerified: false,
+						password: '',
+						createdAt: new Date(),
+						updatedAt: new Date(),
+					});
 				}
-				setIsLoading(false);
 			} catch (error) {
 				console.error('Error fetching user data:', error);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 

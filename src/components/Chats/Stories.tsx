@@ -14,6 +14,9 @@ import { stories } from '../../utils/fakeData';
 
 const Stories = () => {
 	const { user } = useUserContext();
+	if (!user) {
+		return null;
+	}
 	return (
 		<HStack paddingBottom={5} style={{ width }}>
 			<FlatList

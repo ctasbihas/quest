@@ -7,27 +7,29 @@ import { useUserContext } from '../context/UserContext';
 
 const Chats = ({ navigation }) => {
 	const { user } = useUserContext();
-	console.log(user);
-	return (
-		<VStack bgColor={'#000E08'} flex={1}>
-			<Header
-				title="Chats"
-				rightContent={
-					<Avatar
-						width={12}
-						height={12}
-						borderRadius={'full'}
-						source={{
-							uri: user.profilePic as string,
-						}}>
-						{user.name[0]}
-					</Avatar>
-				}
-			/>
-			<Stories />
-			<Messages navigation={navigation} />
-		</VStack>
-	);
+
+	if (user) {
+		return (
+			<VStack bgColor={'#000E08'} flex={1}>
+				<Header
+					title="Chats"
+					rightContent={
+						<Avatar
+							width={12}
+							height={12}
+							borderRadius={'full'}
+							source={{
+								uri: user.profilePic as string,
+							}}>
+							{user.name[0]}
+						</Avatar>
+					}
+				/>
+				<Stories />
+				<Messages navigation={navigation} />
+			</VStack>
+		);
+	}
 };
 
 export default Chats;
