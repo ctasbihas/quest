@@ -1,16 +1,20 @@
 import { useRoute } from '@react-navigation/native';
-import { VStack } from 'native-base';
+import { View } from 'native-base';
 import React from 'react';
+import { Dimensions } from 'react-native';
 import ChatHeader from '../components/Message/ChatHeader';
+import MessageBar from '../components/Message/MessageBar';
 import Messages from '../components/Message/Messages';
 
 const Message = () => {
 	const { params } = useRoute();
+	const { height, width } = Dimensions.get('screen');
 	return (
-		<VStack flex={1}>
+		<View flex={1} background={'black'}>
 			<ChatHeader chatUser={params} />
 			<Messages chatUser={params} />
-		</VStack>
+			<MessageBar />
+		</View>
 	);
 };
 

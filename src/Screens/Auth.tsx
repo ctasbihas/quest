@@ -87,15 +87,19 @@ const Auth = () => {
 					toast.show({
 						description:
 							option === 'Register'
-								? 'Registered successfully'
-								: 'Logged in successfully',
-						placement: 'top',
+								? 'Registration Complete'
+								: 'Login Successful',
+						placement: 'bottom',
+						avoidKeyboard: true,
 					});
 					storeUserData(data);
 				}
 			})
-			.catch(error => {
-				console.error('Error:', error.message);
+			.catch(() => {
+				toast.show({
+					description: 'An error occurred. Please try again.',
+					placement: 'top',
+				});
 			})
 			.finally(() => {
 				setLoading(false);

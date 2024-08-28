@@ -1,20 +1,24 @@
 import { useNavigation } from '@react-navigation/native';
 import { Avatar, HStack, Icon, Pressable, Text, VStack } from 'native-base';
 import React from 'react';
+import { useWindowDimensions } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const ChatHeader = ({ chatUser }: any) => {
 	const navigation = useNavigation();
+	const { height } = useWindowDimensions();
+
 	return (
 		<HStack
 			alignItems={'center'}
 			justifyContent={'space-between'}
+			background={'white'}
+			shadow={'5'}
 			padding={1}
-			paddingRight={2}
-			borderBottomWidth={1}
-			borderBottomColor={'gray.500'}>
+			height={height * 0.08}
+			paddingRight={2}>
 			<HStack alignItems={'center'} flexWrap={'wrap'}>
 				<Pressable
 					onPress={() => navigation.goBack()}
